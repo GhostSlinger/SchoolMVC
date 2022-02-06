@@ -1,8 +1,23 @@
+using Microsoft.EntityFrameworkCore;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
+
+// What I add: Add services to the container.
+builder.Services.AddDbContext<WebSchoolAppContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(WebSchoolAppContext)));
+
+    // Enable lazy loading
+    options.UseLazyLoadingProxies();
+});
+
+
+
+// Default already added: Add services to the container.
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 
@@ -34,9 +49,14 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+//app.UseStatusCodePages();       // 404 page
 app.UseRouting();
 app.UseAuthorization();
+//app.UseSession();           // Enable sessions.
 
+
+// This actually does the same thing home index
+app.MapDefaultControllerRoute();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

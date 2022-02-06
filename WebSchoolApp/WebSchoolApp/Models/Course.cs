@@ -5,6 +5,7 @@ namespace WebSchoolApp.Models;
 
 public class Course
 {
+    [Key, Required]
     public int CourseID { get; set; }
 
     [StringLength(50), MinLength(3)]
@@ -12,6 +13,15 @@ public class Course
 
     [Range(0,5)]
     public int Credits { get; set; }
+
+    [ForeignKey(nameof(Department)), Required]
     public int DepartmentID { get; set; }
+
+    public virtual Department Department { get; set; }
+
+    public virtual List<Enrollment> Enrollments { get; set; }
+
+    //[InverseProperty(nameof(CourseAssignment.Course))]
+    public virtual List<CourseAssignment> CourseAssignments { get; set;}
 }
 

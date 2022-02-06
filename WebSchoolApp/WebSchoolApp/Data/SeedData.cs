@@ -14,7 +14,7 @@ public static class SeedData
     public static void Initialize(WebSchoolAppContext context)
     { 
         // Look for customers
-        if (context.Customers.Any())
+        if (context.Students.Any())
         {
             Console.WriteLine("Database exist!");
             return; // DB has already been seeded.

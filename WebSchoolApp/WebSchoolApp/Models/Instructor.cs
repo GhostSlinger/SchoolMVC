@@ -5,8 +5,10 @@ namespace WebSchoolApp.Models;
 
 public class Instructor
 {
-    [Required]
+    [Key, Required]
     public int InstructorID { get; set; }
+    public virtual OfficeAssignment OfficeAssignment { get; set; }
+
 
     [Required, StringLength(50)]
     public string LastName { get; set; }
@@ -16,5 +18,7 @@ public class Instructor
 
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime HireDate { get; set; }
+
+    public virtual List<CourseAssignment> CourseAssignments { get; set; }
 }
 

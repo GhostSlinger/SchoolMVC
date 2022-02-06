@@ -21,5 +21,29 @@ public class WebSchoolAppContext : DbContext
     public DbSet<CourseAssignment> CourseAssignments { get; set; }
 
     public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
+
+
+
+    // Fluent-API.
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        //builder.Entity<CourseAssignment>().HasNoKey();
+
+        // has composite primary key instead
+        builder.Entity<CourseAssignment>().HasKey(c => new { c.CourseID, c.InstructorID });
+
+
+
+    }
+
+    // Stack overflow example
+    //modelBuilder
+    //.Entity<MyEntity>(builder =>
+    //{
+    //    builder.HasNoKey();
+    //    builder.ToTable("MY_ENTITY");
+    //});
 }
 

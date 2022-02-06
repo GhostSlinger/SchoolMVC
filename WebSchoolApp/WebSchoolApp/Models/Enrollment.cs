@@ -15,10 +15,16 @@ public enum GradeType
 
 public class Enrollment
 {
-    [Required]
+    [Key, Required]
     public int EnrollmentID { get; set; }
+
+    [ForeignKey(nameof(Course)), Required]
     public int CourseID { get; set; }
+    public virtual Course Course { get; set; }
+
+    [ForeignKey(nameof(Student)), Required]
     public int StudentID { get; set; }
+    public virtual Student Student { get; set; }
 
     public GradeType? Grade { get; set; }
 }

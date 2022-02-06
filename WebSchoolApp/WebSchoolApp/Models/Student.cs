@@ -5,7 +5,7 @@ namespace WebSchoolApp.Models;
 
 public class Student
 {
-    [Required]
+    [Key, Required]
     public int StudentID { get; set; }
 
     [Required, StringLength(50)]

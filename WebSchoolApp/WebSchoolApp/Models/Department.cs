@@ -5,7 +5,7 @@ namespace WebSchoolApp.Models;
 
 public class Department
 {
-    [Required]
+    [Key, Required]
     public int DepartmentID { get; set; }
 
     [StringLength(50), MinLength(3)]
@@ -16,7 +16,11 @@ public class Department
 
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime StartDate { get; set; }
-    
+
+    [ForeignKey(nameof(Instructor)), Required]
     public int InstructorID { get; set; }
+    public virtual Instructor Instructor { get; set; }
+
+    public virtual List<Course> Courses { get; set; }
 }
 
